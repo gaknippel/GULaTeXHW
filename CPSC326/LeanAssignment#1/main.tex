@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{titling}
+
+\lstdefinelanguage{Lean}{
+  keywords={structure, where, def, Float, if, then, else},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={RectangularPrism, Segment, Point3D},
+  ndkeywordstyle=\color{purple},
+  identifierstyle=\color{black},
+  sensitive=true,
+  comment=[l]{--},
+  commentstyle=\color{gray}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+  language=Lean,
+  basicstyle=\ttfamily\small,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=8pt,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{white},
+  tabsize=2,
+  captionpos=b
+}
+
+\begin{document}
+
+\title{Lean Structures Exercises}
+\author{
+Greyson Knippel \\[4pt]
+CPSC 326-01 --- Gonzaga University, compiled with \LaTeX \\[4pt]
+Professor Johnson
+}
+\date{\today}
+\maketitle
+
+
+\section*{problem 1}
+
+\subsection*{part (a): }
+
+\begin{lstlisting}
+structure RectangularPrism where
+  height : Float
+  width : Float
+  depth : Float
+\end{lstlisting}
+
+\subsection*{Part (b): }
+
+\begin{lstlisting}
+def volume (r1 : RectangularPrism) : Float :=
+  r1.height * r1.width * r1.depth
+
+def myPrism : RectangularPrism := 
+  {height := 5.0, width := 2.0, depth := 6.0}
+
+#eval volume myPrism
+\end{lstlisting}
+
+\subsection*{Part (c):}
+
+\begin{lstlisting}
+structure Segment where
+  s1 : Float
+  s2 : Float
+  f1 : Float
+  f2 : Float
+
+def mySegment : Segment := 
+  {s1 := 0.0, s2 := 0.0, f1 := 5.0, f2 := 4.0}
+
+def length (m : Segment) : Float :=
+  Float.sqrt (((m.f1 - m.s1)^2) + ((m.f2 - m.s2)^2))
+
+#eval length mySegment
+\end{lstlisting}
+
+\section*{problem 2:}
+
+\begin{enumerate}
+  \item \textbf{strict:} functions and parameters are fully evaluated before the function body begins evaluation.
+  
+  \item \textbf{pure:} programs cannot have side effects.
+  
+  \item \textbf{functional:} functions are primary objects of interest; computation is evaluating functions (mathematical expressions).
+  
+  \item \textbf{has dependent types:} types can contain programs that compute types.
+\end{enumerate}
+
+\section*{problem 3:}
+
+\begin{lstlisting}
+structure Point3D where
+  x : Float
+  y : Float
+  z : Float
+\end{lstlisting}
+
+\section*{problem 4:}
+
+\begin{lstlisting}
+def minimumComponent (p : Point3D) : Float :=
+  if (p.x < p.y) then
+    if p.x < p.z then p.x else p.z
+  else
+    if p.y < p.z then p.y else p.z
+\end{lstlisting}
+
+\section*{problem 5:}
+
+\begin{lstlisting}
+def midpoint (p1 : Point3D) (p2 : Point3D) : Point3D :=
+  { x := (p1.x - p2.x) /2.0,
+    y := (p1.y - p2.y) /2.0,
+    z := (p1.z - p2.z) /2.0 }
+\end{lstlisting}
+
+\end{document}

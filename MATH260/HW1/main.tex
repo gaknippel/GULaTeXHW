@@ -1,0 +1,120 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{float}
+
+\geometry{margin=1in}
+
+\title{ODE HW 1}
+\author{
+Greyson Knippel \\[4pt]
+MATH 260-1 --- Gonzaga University \\[4pt]
+Professor Jensen
+}
+\date{\today}
+
+
+
+\begin{document}
+
+\maketitle
+
+
+\section*{problem 6}
+
+Show that the function
+\[
+y(t) = \frac{4}{1 + Ce^{-4t}}, \quad C = 1,2,\dots,5
+\]
+is a general solution of the differential equation
+\[
+y' = y(4 - y).
+\]
+
+
+\section*{solution}
+
+rewrite so we dont have to divide.
+\[
+y = 4(1 + Ce^{-4t})^{-1}.
+\]
+
+differentiate using chain rule and power rule.
+\[
+y' = 4(-1)(1 + Ce^{-4t})^{-2} \cdot \frac{d}{dt}(1 + Ce^{-4t}).
+\]
+
+since
+\[
+\frac{d}{dt}(1 + Ce^{-4t}) = -4Ce^{-4t},
+\]
+we obtain
+\[
+y' = \frac{16Ce^{-4t}}{(1 + Ce^{-4t})^2}.
+\]
+
+now compute \( y(4 - y) \):
+\[
+4 - y = 4 - \frac{4}{1 + Ce^{-4t}}
+      = \frac{4Ce^{-4t}}{1 + Ce^{-4t}}.
+\]
+
+thus,
+\[
+y(4 - y)
+= \frac{4}{1 + Ce^{-4t}} \cdot \frac{4Ce^{-4t}}{1 + Ce^{-4t}}
+= \frac{16Ce^{-4t}}{(1 + Ce^{-4t})^2}.
+\]
+
+since \( y' = y(4 - y) \), the function satisfies the differential equation.
+therefore, \( y(t) = \frac{4}{1 + Ce^{-4t}} \) is a general solution.
+
+
+\section*{MATLAB plot}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Figure_1.png}
+\caption{Solutions of the differential equation $y' = y(4 - y)$
+for $C = 1,2,\dots,5$.}
+\end{figure}
+
+
+\section*{problem 7}
+A general solution may fail to produce all solutions of a
+differential equation. In Problem 6, show that y = 0 is a
+solution of the differential equation, but no value of C in
+the given general solution will produce this solution.
+
+\section*{solution}
+
+Take
+\[
+y(t) = 0.
+\]
+Then
+\[
+y'(t) = 0,
+\]
+and substituting into the differential equation gives
+\[
+y(4 - y) = 0 \cdot (4 - 0) = 0.
+\]
+Since \(y' = y(4 - y)\), the constant function \(y = 0\) satisfies the differential equation.
+
+
+\[
+\]
+The constant function \(y = 0\) satisfies the differential equation but cannot be 
+obtained from the general solution because no value of 
+\(C\) makes \(\frac{4}{1 + Ce^{-4t}} = 0\).
+
+\section*{problem 11}
+show that 
+
+
+
+
+\end{document}

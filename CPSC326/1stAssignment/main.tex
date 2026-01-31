@@ -1,0 +1,85 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{titling}
+\setlength{\droptitle}{-3em}
+
+\begin{document}
+
+\title{Lambda Calculus Constructions}
+\author{
+Greyson Knippel \\[4pt]
+CPSC 326-01 --- Gonzaga University, compiled with \LaTeX \\[4pt]
+Professor Johnson
+}
+\date{\today}
+\maketitle
+
+\section*{to start off:}
+
+\[
+\text{SUCC } X = X + 1
+\]
+
+\[
+\text{PRED } X = X - 1
+\]
+
+\[
+(= X\, Y) \Rightarrow \text{T/F}
+\]
+
+\section*{construction of ADD}
+
+using recursion: \(R\), ADD can be defined as:
+
+\[
+\begin{aligned}
+\text{R ADD } X\, Y &= R\, \text{ADD}\, X\, Y \\
+&= \text{(if) } (= Y\, 0)\, \text{(then) } X\, \text{(else) }(\text{ADD } (\text{SUCC } X)\, (\text{PRED } Y))
+\end{aligned}
+\]
+
+\section*{construction of MULT}
+
+MULT can also be defined by using recursion R: but this time its simply just repeated addition.
+
+\[
+\begin{aligned}
+\text{R MULT } X\, Y &= R\, \text{MULT}\, X\, Y \\
+&= \text{(if) } (= Y\, 0)\, \text{(then) } 0\, \text{(else) }(\text{ADD } X\, (\text{MULT } X\, (\text{PRED } Y)))
+\end{aligned}
+\]
+
+\section*{example --- ADD 2 3}
+
+\[
+\begin{aligned}
+\text{R ADD } 2\, 3 &= \text{(if) } (= 3\, 0)\, 2\, (\text{ADD } (\text{SUCC } 2)\, (\text{PRED } 3)) \\
+&= \text{(if) } (= 2\, 0)\, 3\, (\text{ADD } (\text{SUCC } 3)\, (\text{PRED } 2)) \\
+&= \text{(if) } (= 1\, 0)\, 4\, (\text{ADD } (\text{SUCC } 4)\, (\text{PRED } 1)) \\
+&= \text{(if) } (= 0\, 0)\, 5\, (\text{ADD } (\text{SUCC } 5)\, (\text{PRED } 0)) \\[0.5em]
+&\text{- basically (= y 0) is your base case,} \\
+&\quad \text{then use recursion with SUCC AND PRED.} \\[0.5em]
+&= 5
+\end{aligned}
+\]
+
+\section*{example --- MULT 2 4}
+
+\[
+\begin{aligned}
+\text{MULT } 2\, 4 &= \text{(if) } (= 4\, 0)\, \text{(then) } 0\, \text{(else) }(\text{ADD } 2\, (\text{MULT } 2\, (\text{PRED } 4))) \\
+&= \text{(if) } (= 3\, 0)\, \text{(then) } 0\, \text{(else) }(\text{ADD } 2\, (\text{MULT } 2\, (\text{PRED } 3))) \\
+&= \text{(if) } (= 2\, 0)\, \text{(then) } 0\, \text{(else) }(\text{ADD } 2\, (\text{MULT } 2\, (\text{PRED } 2))) \\
+&= \text{(if) } (= 1\, 0)\, \text{(then) } 0\, \text{(else) }(\text{ADD } 2\, (\text{MULT } 2\, (\text{PRED } 1))) \\
+&= \text{(if) } (= 0\, 0)\, \text{(then) } 0\, \text{(else) }(\text{ADD } 2\, (\text{MULT } 2\, (\text{PRED } 0))) \\[0.5em]
+&\text{and adding all the recursions together with the ADD block\ldots} \\
+&\text{- basically we are just using ADD's recursion,} \\
+&\quad \text{doing repeated addition with MULT's recursion.} \\[0.5em]
+&= 8
+\end{aligned}
+\]
+
+\end{document}
