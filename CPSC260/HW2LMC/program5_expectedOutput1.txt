@@ -1,0 +1,5 @@
+Successfully opened file [program5.txt].
+Enter input and press enter: 12
+Enter input and press enter: 13
+Output:   0
+Exiting program...

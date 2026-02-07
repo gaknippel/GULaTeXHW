@@ -1,0 +1,22 @@
+Program1:
+-performs 3 + 12 and outputs the result
+
+Program2:
+-Results in an infinite loop, printing -10 forever.
+
+Program3:
+-Results in a countdown from 10, 9, 8, ... , 3, 2, 1, Exit
+
+Program4:
+-if the two numbers in mailbox 9 and 10 are the same, output 1, else output 0
+
+Program5:
+-same as program4, except user inputs from user
+
+Program6:
+-LMC program from lecture slides checking if x > 10
+-- if x > 10 output 0, else output 1
+
+Program7:
+-LMC program from lecture slides, countdown from input value
+    to 1. e.g. if user inputs 7, countdown from 7 to 1.

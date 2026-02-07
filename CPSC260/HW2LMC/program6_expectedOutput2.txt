@@ -1,0 +1,4 @@
+Successfully opened file [program6.txt].
+Enter input and press enter: 17
+Output:   0
+Exiting program...

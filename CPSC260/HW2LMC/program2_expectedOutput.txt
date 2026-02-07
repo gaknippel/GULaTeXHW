@@ -1,0 +1,24 @@
+Successfully opened file [program2.txt].
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+Output: -10
+...continues forever until interupt signal sent (ctrl-C)

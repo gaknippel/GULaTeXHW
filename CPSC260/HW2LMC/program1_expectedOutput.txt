@@ -1,0 +1,3 @@
+Successfully opened file [program1.txt].
+Output:  15
+Exiting program...
