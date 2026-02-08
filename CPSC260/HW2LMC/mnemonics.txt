@@ -1,0 +1,95 @@
+program 1:
+
+        LDA num1
+        ADD num2
+        OUT
+        HLT
+   num1 DAT 3
+   num2 DAT 12
+
+
+program 2:
+
+
+loop    LDA num1
+        SUB num2
+        OUT
+        BRA loop
+        HLT
+num1    DAT 70
+num2    DAT 80
+
+program 3:
+
+        LDA counter
+loop    OUT
+        SUB one
+        BRP loop
+        HLT
+counter DAT 10
+one     DAT 1
+
+
+program 4:
+
+
+LDA     num1
+        SUB num2
+        BRZ equal
+        LDA false
+        OUT
+        HLT
+equal   LDA true
+        OUT
+        HLT
+num1    DAT 13
+num2    DAT 13
+true    DAT 1
+false   DAT 0
+
+
+program 5:
+
+
+        INP
+        STA temp
+        INP
+        SUB temp
+        BRZ equal
+        LDA false
+        OUT
+        HLT
+equal   LDA true
+        OUT
+        HLT
+true    DAT 1
+false   DAT 0
+temp    DAT
+
+program 6:
+
+        INP
+        SUB ten
+        BRP greater_equal
+        LDA true
+        OUT
+        BRA done
+greater_equal LDA false
+        OUT
+done    HLT
+ten     DAT 10
+true    DAT 1
+false   DAT 0
+
+
+program 7:
+
+        INP
+loop    OUT
+        SUB one
+        BRP loop
+        HLT
+one     DAT 1
+
+
+

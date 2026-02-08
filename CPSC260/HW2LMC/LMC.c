@@ -83,8 +83,8 @@ void fetch(){
 
 void decode(){ 
     //convert the three-digit instruction into a task to do
-    lmc.opcode = lmc.currentInstruction / 100;
-    lmc.operand = lmc.currentInstruction % 100;
+    lmc.opcode = lmc.currentInstruction / 100; //gets first digit of 3 digit instruction
+    lmc.operand = lmc.currentInstruction % 100; //gets remainder, or last 2 digits of instruction
     //get opcode and operand
     
 
