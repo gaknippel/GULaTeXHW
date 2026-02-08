@@ -72,6 +72,9 @@ void fetch(){
         printf("fetching instruction: %2d\n", lmc.instructionCounter);
     }
 
+    lmc.currentInstruction = lmc.mailboxes[lmc.instructionCounter];
+    
+    lmc.instructionCounter++;
     //get next instruction from mailbox at instruction counter
     //increment instruction counter
 
@@ -80,7 +83,8 @@ void fetch(){
 
 void decode(){ 
     //convert the three-digit instruction into a task to do
-    
+    lmc.opcode = lmc.currentInstruction / 100;
+    lmc.operand = lmc.currentInstruction % 100;
     //get opcode and operand
     
 
@@ -94,29 +98,34 @@ void execute(){
 
     //perform the task of the the opcode and operand
     switch(lmc.opcode){
-        case 0:
-
+        case 0: //halt
+        printf("exiting program...\n");
+        exit(0);
             break;
-        case 1:
-
+        case 1: //add
+        lmc.accumulator += lmc.mailboxes[lmc.operand];
             break;
-        case 2:
-
+        case 2: //subtract
+        lmc.accumulator -= lmc.mailboxes[lmc.operand];
             break;
-        case 3:
-
+        case 3: //store
+        lmc.mailboxes[lmc.operand] = lmc.accumulator;
             break;
-        case 5:
-
+        case 5: //load
+        lmc.accumulator = lmc.mailboxes[lmc.operand];
             break;
-        case 6:
-
+        case 6: //branch
+        lmc.instructionCounter = lmc.operand;
             break;
-        case 7:
-
+        case 7: //branch if zero
+        if(lmc.zeroFlag == 1){
+            lmc.instructionCounter = lmc.operand;
+        }
             break;
-        case 8:
-
+        case 8: //branch if pos
+        if(lmc.negativeFlag == 0){
+            lmc.instructionCounter = lmc.operand;
+        }
             break;
         case 9:
             // IO case already completed
@@ -133,13 +142,23 @@ void execute(){
     /*************************/
     //set flags here
     /*************************/
-
-
-
-
-
-
-
+    if(lmc.accumulator == 0)
+    {
+        lmc.zeroFlag = 1;
+    }
+    else
+    {
+        lmc.zeroFlag = 0;
+    }
+    
+    if(lmc.accumulator < 0)
+    {
+        lmc.negativeFlag = 1;
+    }
+    else
+    {
+        lmc.negativeFlag = 0;
+    }
 
 
     if(lmc.debugMode == 1){

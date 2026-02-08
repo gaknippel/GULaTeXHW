@@ -20,5 +20,16 @@ int main() {
     printf("double is: %d bytes\n", size);
 
 
+    int instruction = 504;
+
+    int opcode = instruction / 100;
+
+    printf("opcode is: %d \n", opcode);
+
+    int operand = instruction % 100;
+
+    printf("operand is: %d \n", operand);
+
+
     return 0;
 }
