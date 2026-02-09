@@ -1,0 +1,9 @@
+bwlq
+
+b = bits (8 bits)
+
+w = 16 bits
+
+l = 32 bits
+
+q = 64 bits

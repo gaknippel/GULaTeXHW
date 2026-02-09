@@ -1,7 +1,7 @@
     .global _start
     .text
 _start:
-    movl $80155, %eax
+    movl $80155, %eax 
     movl $10644, %ebx
 
     /* exit program*/
