@@ -7,3 +7,11 @@ w = 16 bits
 l = 32 bits
 
 q = 64 bits
+
+-- explicit instruction
+$ 42 literally move number 42 to %eax register (32 bits)
+
+-- inplicit instruction
+
+
+movl $42 %eax
