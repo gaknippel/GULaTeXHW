@@ -63,23 +63,29 @@ $k$ & $x_k$ & $z_k$ & $f(x_k, z_k)$ & $f \cdot h$ & $z_{k+1}$ \\
 
 \textbf{code:}
 \begin{lstlisting}
+# eulers method for z' = x - 2z, z(0) = 1
 
-# euler's method
+
 x = 0.0
-z = 1.0
+z = 1.0 
 h = 0.1
+
 steps = 5
+
+print(f"{'k':<5} {'x_k':<8} {'z_k':<8} {'f(x_k,z_k)':<12} {'f*h':<10} {'z_k+1':<8}") #table variables
+print("-" * 60)
 
 for k in range(steps):
     f = x - 2*z
-    f_times_h = f * h
-    z_next = z + f_times_h
-    
-    print(f"{k:<5} {x:<8.1f} {z:<8.4f} {f:<12.4f} #table variables
-           {f_times_h:<10.4f} {z_next:<8.4f}")
-    
+    f_times_h = f*h
+    next_z = z + f_times_h
+
+    print(f"{k:<5} {x:<8.1f} {z:<8.4f} {f:<12.4f} {f_times_h:<10.4f} {next_z:<8.4f}")
+
     x = x + h
-    z = z_next
+    z = next_z
+
+print(f"{steps:<5} {x:<8.1f} {z:<8.4f}")
 \end{lstlisting}
 
 \section*{RK2 midpoint method}
@@ -103,22 +109,27 @@ $k$ & $x_k$ & $z_k$ & $k_1$ & $k_2$ & $z_{k+1}$ \\
 \end{table}
 \textbf{code:}
 \begin{lstlisting}
-# RK2 midpoint method
+# RK2 Midpoint Method for z' = x - 2z, z(0) = 1, h = 0.1
+
 x = 0.0
 z = 1.0
 h = 0.1
 steps = 5
+
+print(f"{'k':<5} {'x_k':<8} {'z_k':<10} {'k1':<10} {'k2':<10} {'z_k+1':<10}") #table variables
+print("-" * 60)
 
 for k in range(steps):
     k1 = x - 2*z
     k2 = (x + h/2) - 2*(z + k1*h/2)
     z_next = z + k2*h
     
-    print(f"{k:<5} {x:<8.1f} {z:<10.4f} {k1:<10.4f} #table variables
-           {k2:<10.4f} {z_next:<10.4f}") 
+    print(f"{k:<5} {x:<8.1f} {z:<10.4f} {k1:<10.4f} {k2:<10.4f} {z_next:<10.4f}")
     
     x = x + h
     z = z_next
+
+print(f"{steps:<5} {x:<8.1f} {z:<10.4f}")
 \end{lstlisting}
 
 \vfill
