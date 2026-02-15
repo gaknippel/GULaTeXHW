@@ -185,28 +185,13 @@ def getPrerequisites (c : Course) : List Course :=
   | Course.cpsc492 => [Course.cpsc491, Course.cpsc391, Course.cpsc224, Course.cpsc122, Course.cpsc121]
   | Course.cpsc499 => [Course.cpsc391, Course.cpsc224, Course.cpsc122, Course.cpsc121]
 
-
-def countCourses (tree : PrereqTree) : Nat :=
-  let leftCount :=
-    match tree.left with
-    | none => 0
-    | some _ => 1
-    let middleCount :=
-    match tree.middle with
-    | none => 0
-    | some _ => 1
-    let rightCount :=
-    match tree.right with
-    | none => 0
-    | some _ => 1
-  1 + leftCount + middleCount + rightCount
-
-
-
-  def courseInList (c : Course) (list : List Course) : Bool :=
+def courseInList (c : Course) (list : List Course) : Bool :=
   match list with
   | [] => false
-  | x :: xs => if courseEq c x then true else courseInList c xs
+  | x :: xs =>
+      match courseEq c x with
+      | true => true
+      | false => courseInList c xs
 
 def calculateCompletion (completed : List Course) : Nat :=
   let allCourses := [Course.cpsc121, Course.cpsc122, Course.cpsc223, Course.cpsc224,
@@ -226,58 +211,49 @@ def calculateCompletion (completed : List Course) : Nat :=
 
 def coursesToString (courses : List Course) : String :=
   match courses with
-  | [] => "None"
+  | [] => "none"
   | [c] => courseToString c
-  | c :: rest => courseToString c ++ ", " ++ coursesToString rest
+  | c :: rest => courseToString c ++ ", " ++ coursesToString rest -- ++ is just string.append but easier
 
 
 def displayPrereqs (c : Course) : String :=
   let courseName := courseToString c
   let prereqs := getPrerequisites c
-  courseName ++ ":\n" ++
-  "  Prerequisites: " ++ coursesToString prereqs
+  "prereqs for: " ++ courseName ++ ":\n" ++
+  "  prerequisites: " ++ coursesToString prereqs
 
-  def main : IO Unit := do
-  IO.println "=== Johnson University CS Major Prerequisite Checker ==="
+  def main : IO Unit := do --do is very useful here. it does these print things one after another
+  IO.println "---johnson university CS major prerequisite checker---"
   IO.println ""
 
-  -- FUNCTIONALITY 1: Show prerequisites
-  IO.println "FUNCTIONALITY 1: Prerequisite Lookup"
-  IO.println "====================================="
+  -- change course number to search for a specific prereq chain
+  IO.println "change course here to see certain prereqs! \n"
   IO.println (displayPrereqs Course.cpsc492)
-  IO.println ""
-  IO.println (displayPrereqs Course.cpsc326)
-  IO.println ""
-  IO.println (displayPrereqs Course.cpsc491)
-  IO.println ""
-  IO.println (displayPrereqs Course.cpsc121)
-  IO.println ""
 
-  -- FUNCTIONALITY 2 & 3: Calculate completion
-  IO.println "FUNCTIONALITY 2 & 3: Major Completion"
-  IO.println "====================================="
+  -- calculate completion
+  IO.println "------------------------------------------------------"
 
-  -- Example: student has completed some courses
+  -- my tree
   let myCompleted := [Course.cpsc121, Course.cpsc122, Course.cpsc223,
-                      Course.cpsc224, Course.cpsc326, Course.cpsc391]
+                      Course.cpsc224,]
 
-  IO.println "My completed courses:"
+  IO.println "my completed courses:"
   IO.println ("  " ++ coursesToString myCompleted)
   IO.println ""
 
   let percentage := calculateCompletion myCompleted
-  IO.println ("Major completion: " ++ toString percentage ++ "%")
+  IO.println ("major completion: " ++ toString percentage ++ "%")
   IO.println ""
 
   -- Show which courses are still needed
-  IO.println "Courses still needed:"
+  IO.println "courses still needed:"
   let allCourses := [Course.cpsc121, Course.cpsc122, Course.cpsc223, Course.cpsc224,
                      Course.cpsc260, Course.cpsc326, Course.cpsc351, Course.cpsc346,
                      Course.cpsc348, Course.cpsc391, Course.cpsc450, Course.cpsc491,
                      Course.cpsc492, Course.cpsc499]
   let rec showMissing (courses : List Course) : IO Unit :=
     match courses with
-    | [] => pure ()
+    | [] => pure () -- have to output nothing or else lean gets mad
     | c :: rest => do
         if courseInList c myCompleted then
           showMissing rest
@@ -286,4 +262,8 @@ def displayPrereqs (c : Course) : String :=
           showMissing rest
   showMissing allCourses
 
-#eval main
+--#eval main
+
+
+-- type "lean --run main.lean" in bash terminal to run this program.
+-- or just type in "#eval main" to run it as well.
