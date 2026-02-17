@@ -185,11 +185,11 @@ def getPrerequisites (c : Course) : List Course :=
   | Course.cpsc492 => [Course.cpsc491, Course.cpsc391, Course.cpsc224, Course.cpsc122, Course.cpsc121]
   | Course.cpsc499 => [Course.cpsc391, Course.cpsc224, Course.cpsc122, Course.cpsc121]
 
-def courseInList (c : Course) (list : List Course) : Bool :=
+def courseInList (c : Course) (list : List Course) : Bool := --helper function for main
   match list with
   | [] => false
   | x :: xs =>
-      match courseEq c x with
+      match courseEq c x with --match with head of list and c, if not recusively go thru c and xs (the rest of the list)
       | true => true
       | false => courseInList c xs
 
@@ -228,7 +228,7 @@ def displayPrereqs (c : Course) : String :=
 
   -- change course number to search for a specific prereq chain
   IO.println "change course here to see certain prereqs! \n"
-  IO.println (displayPrereqs Course.cpsc492)
+  IO.println (displayPrereqs Course.cpsc492)  --CHANGE THIS LINE TO DISPLAY DESIRED PREREQS
 
   -- calculate completion
   IO.println "------------------------------------------------------"
