@@ -163,7 +163,7 @@ def fives : String × Int :=
 
 inductive Sum (α : Type)(β : Type) : Type where
 | inl : α -> Sum α β
-| inr : β -> Sym α β
+| inr : β -> Sum α β
 
 
 def petNames : Type := String ⊕ String
@@ -273,3 +273,23 @@ match xs with
 |(y,z) :: yzs =>
   let (ys, zs) : List α × List β := unzip yzs
   (y :: ys, z :: zs)
+
+
+
+
+-- different data types:
+
+
+inductive Bool where
+|true : Bool
+|false : Bool
+
+-- two options for bool when constructing :)
+
+
+inductive Nat where
+|zero : Nat
+|succ : Nat -> Nat
+
+
+-- two options, zero or nat. recurisvely adds on to itself when constructing numbers greater than 0.
